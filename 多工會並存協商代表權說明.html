@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多工會並存時之團體協約協商代表權</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    background: #f7f8fa;
+    color: #1a202c;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  h1 { font-size: 1.5rem; color: #1a365d; border-bottom: 3px solid #3182ce; padding-bottom: 10px; margin-bottom: 6px; }
+  .subtitle { color: #718096; font-size: 0.85rem; margin-bottom: 28px; }
+
+  h2 { font-size: 1.1rem; color: #2c5282; margin: 28px 0 12px; border-left: 4px solid #3182ce; padding-left: 10px; }
+  h3 { font-size: 0.97rem; color: #2d3748; margin: 16px 0 8px; font-weight: 700; }
+
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 5px; }
+
+  /* 法條卡片 */
+  .law-card {
+    background: #ebf8ff;
+    border: 1px solid #bee3f8;
+    border-left: 4px solid #3182ce;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  .law-card .law-title {
+    font-weight: 700;
+    color: #2b6cb0;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+
+  /* 重點提示 */
+  .tip {
+    background: #fffff0;
+    border: 1px solid #f6e05e;
+    border-left: 4px solid #d69e2e;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  .tip::before { content: "⚠️ 注意　"; font-weight: 700; color: #744210; }
+
+  .info {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-left: 4px solid #38a169;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  .info::before { content: "✅ 實務要點　"; font-weight: 700; color: #276749; }
+
+  /* 流程步驟 */
+  .steps { counter-reset: step; margin: 12px 0; }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: #3182ce;
+    color: #fff;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.82rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-weight: 700; color: #2d3748; margin-bottom: 4px; }
+
+  /* 比較表 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin: 14px 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+  th {
+    background: #2c5282;
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f7fafc; }
+  .tag {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .tag-blue { background: #bee3f8; color: #2b6cb0; }
+  .tag-green { background: #c6f6d5; color: #276749; }
+  .tag-red { background: #fed7d7; color: #c53030; }
+  .tag-yellow { background: #fefcbf; color: #744210; }
+
+  /* 計算公式框 */
+  .formula {
+    background: #fff5f5;
+    border: 1.5px dashed #fc8181;
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c53030;
+    margin: 14px 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* 情境案例 */
+  .case {
+    background: #faf5ff;
+    border: 1px solid #d6bcfa;
+    border-left: 4px solid #805ad5;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  .case-title { font-weight: 700; color: #553c9a; margin-bottom: 8px; font-size: 0.92rem; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 28px 0;
+  }
+
+  .source-note {
+    font-size: 0.76rem;
+    color: #a0aec0;
+    margin-top: 32px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 12px;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .container { padding: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>多工會並存時之團體協約協商代表權</h1>
+<p class="subtitle">依工會法、團體協約法及勞動部相關函釋整理　｜　適用對象：企業、企業工會、產業工會、職業工會</p>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>一、工會種類與協商代表權基礎</h2>
+
+<table>
+  <tr>
+    <th>工會種類</th>
+    <th>組成方式</th>
+    <th>協商對象</th>
+    <th>代表範圍</th>
+    <th>法律依據</th>
+  </tr>
+  <tr>
+    <td><span class="tag tag-blue">企業工會</span></td>
+    <td>結合同一廠場、事業單位、關係企業勞工組成</td>
+    <td>該事業單位雇主</td>
+    <td>僅限該企業內之會員</td>
+    <td>工會法 §6①</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-green">產業工會</span></td>
+    <td>結合相關產業勞工組成（跨廠場）</td>
+    <td>雇主或雇主團體</td>
+    <td>同產業跨事業單位之會員</td>
+    <td>工會法 §6②</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-yellow">職業工會</span></td>
+    <td>結合相關職業技能勞工組成（無一定雇主者為主）</td>
+    <td>雇主或雇主團體</td>
+    <td>同職業之會員（含無一定雇主者）</td>
+    <td>工會法 §6③</td>
+  </tr>
+</table>
+
+<div class="law-card">
+  <div class="law-title">工會法 第6條（工會種類）</div>
+  工會分為下列三種：一、企業工會：結合同一廠場、同一事業單位、依公司法所定具有控制與從屬關係之企業，或依金融控股公司法所定金融控股公司與子公司內之勞工，所組織之工會。二、產業工會：結合相關產業內之勞工，所組織之工會。三、職業工會：結合相關職業技能之勞工，所組織之工會。
+</div>
+
+<div class="tip">
+  勞工可同時加入企業工會與產業工會（或職業工會），並不衝突。兩種工會均可就各自代表之會員向雇主請求協商。
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>二、協商代表權的核心規定</h2>
+
+<div class="law-card">
+  <div class="law-title">團體協約法 第6條（協商代表與誠信協商）</div>
+  <p>勞資雙方均負有進行誠信協商之義務。工會或雇主無正當理由拒絕協商者，構成不當勞動行為（參工會法 §35①四）。</p>
+  <p style="margin-top:6px;">協商代表之資格：工會之理事或其代理人（代理人以工會會員為限）；雇主方亦同。協商代表人數，由雙方約定，未約定者，各不得逾21人。</p>
+</div>
+
+<div class="law-card">
+  <div class="law-title">團體協約法 第6條 — 多工會並存時之特別規定</div>
+  <p>同一事業單位或同一雇主有二個以上之工會時：</p>
+  <ol style="margin-top:6px;">
+    <li><strong>各工會均有請求協商之權利</strong>，雇主不得拒絕（無正當理由拒絕者為不當勞動行為）。</li>
+    <li>工會得<strong>聯合組成協商委員會</strong>，以單一協商體與雇主進行協商；此為優先建議方式。</li>
+    <li>若無法合意聯合協商，各工會<strong>得各自向雇主提出協商請求</strong>。</li>
+    <li>聯合協商時，各工會依<strong>在該事業單位內之會員人數比例</strong>分配協商代表名額。</li>
+  </ol>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>三、協商優先順序（多工會並存情境）</h2>
+
+<table>
+  <tr>
+    <th>優先層級</th>
+    <th>情境說明</th>
+    <th>處理方式</th>
+  </tr>
+  <tr>
+    <td><span class="tag tag-blue">第一優先</span><br>聯合協商</td>
+    <td>同一事業單位有多個工會，各工會協商達成聯合共識</td>
+    <td>各工會共同組成「協商委員會」，依會員比例分配代表席次，以單一陣線與雇主協商，效力最完整</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-yellow">第二優先</span><br>個別協商</td>
+    <td>無法達成聯合協商合意，或任一工會拒絕聯合</td>
+    <td>各工會分別向雇主請求協商；雇主應分別與各工會協商，但可能導致多份協約並存，需留意整合</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-red">特殊情形</span><br>企業工會優先</td>
+    <td>產業工會或職業工會成員在該事業單位已加入企業工會者</td>
+    <td>對於同一勞工之同一勞動條件，企業工會之協約效力在事業單位內優先適用；但產業/職業工會協約仍對其他未加入企業工會之勞工有效</td>
+  </tr>
+</table>
+
+<div class="info">
+  實務上勞動部鼓勵多工會聯合協商，以避免重複協商或協約條件不一致之問題。雇主亦可主動邀請各工會共同協商，有助降低協商成本。
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>四、依會員人數比例分配協商代表</h2>
+
+<h3>4-1 計算基準</h3>
+<p>以<strong>各工會在該事業單位內之實際會員人數</strong>（扣除重複加入之勞工，以其主要加入之工會為計算基礎）為準，依比例分配協商代表名額。</p>
+
+<div class="formula">
+某工會協商代表數 ＝ 協商代表總名額 × （該工會在本事業單位之會員數 ÷ 各工會在本事業單位之會員總數）
+</div>
+
+<div class="case">
+  <div class="case-title">📌 案例試算</div>
+  <p>某製造業事業單位，協商代表總名額雙方約定各9人（勞方9人）：</p>
+  <ul style="margin-top:8px;">
+    <li>A 企業工會：在本事業單位會員 300 人 → 300/500 = 60% → 代表 <strong>5.4 → 5人</strong></li>
+    <li>B 產業工會（在本廠區之會員）：200 人 → 200/500 = 40% → 代表 <strong>3.6 → 4人</strong></li>
+    <li>合計 9 人（小數點採四捨五入或各工會協商約定進位方式）</li>
+  </ul>
+  <p style="margin-top:8px; color:#553c9a;">※ 若各工會對比例計算有爭議，得申請主管機關調解或裁決。</p>
+</div>
+
+<h3>4-2 協商委員會組成程序</h3>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">任一工會發起聯合協商提議</div>
+      以書面通知其他工會，說明協商事項、建議代表分配方式及召開協商委員會籌備會議之時間。
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">確認各工會在事業單位之會員人數</div>
+      各工會提供正式會員名冊（在職、在籍於該事業單位）供核對。若有爭議，可請主管機關協助查核。
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">依比例計算並分配代表名額</div>
+      依前述公式計算，各工會內部依工會法規定程序（理事會或會員大會）推舉協商代表。
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-title">推舉協商委員會召集人</div>
+      各工會協商代表共同推舉召集人一人（通常由最大工會代表擔任），作為對外窗口。
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <div class="step-title">以書面通知雇主，提出協商請求</div>
+      依團體協約法第6條，以書面通知雇主協商代表姓名、協商事項，並請雇主指定協商時間、地點。
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <div class="step-title">進行誠信協商</div>
+      雙方應以誠信為原則，不得無故拒絕、延誤協商或提出顯不合理之要求（否則構成不當勞動行為）。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>五、工會間爭議之處理機制</h2>
+
+<table>
+  <tr>
+    <th>爭議類型</th>
+    <th>處理途徑</th>
+    <th>法律依據</th>
+  </tr>
+  <tr>
+    <td>工會間就協商主導權、代表分配無法達成共識</td>
+    <td>各工會得各自向雇主提出協商請求（分別協商）；或申請直轄市/縣市主管機關介入協調</td>
+    <td>團體協約法 §6、勞資爭議處理法 §9</td>
+  </tr>
+  <tr>
+    <td>雇主拒絕與某一工會協商（差別對待）</td>
+    <td>被拒絕之工會得向勞動部不當勞動行為裁決委員會申請裁決</td>
+    <td>工會法 §35①四、勞資爭議處理法 §39</td>
+  </tr>
+  <tr>
+    <td>雇主偏衵特定工會，拒絕與其他工會協商</td>
+    <td>申請不當勞動行為裁決；情節嚴重者雇主得受罰鍰（§45）</td>
+    <td>工會法 §35①五、§45</td>
+  </tr>
+  <tr>
+    <td>協約條文衝突（多份協約並存，條件不一）</td>
+    <td>依「後法優先」原則，或以對勞工較有利之條件適用（有利原則）</td>
+    <td>團體協約法 §19（有利原則）</td>
+  </tr>
+  <tr>
+    <td>一工會阻止另一工會與雇主協商</td>
+    <td>被阻止之工會得申請裁決，認定妨礙行為構成不當勞動行為</td>
+    <td>工會法 §35②（工會間不當勞動行為）</td>
+  </tr>
+</table>
+
+<div class="law-card">
+  <div class="law-title">工會法 第35條（不當勞動行為）重點摘錄</div>
+  <p>雇主或代表雇主行使管理權之人，不得有下列行為：</p>
+  <ul style="margin-top:6px;">
+    <li>四、對於勞工提出團體協商之要求，拒絕協商，或對於協商事項，無正當理由拒絕協商。</li>
+    <li>五、支配、介入工會之組成或活動，或對工會給予財務上之資助。</li>
+  </ul>
+  <p style="margin-top:6px;">違反者，工會得申請裁決，裁決確定後得聲請法院強制執行；雇主亦可能受30萬元以上150萬元以下罰鍰（§45）。</p>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>六、多工會並存之協商模式比較表</h2>
+
+<table>
+  <tr>
+    <th>比較面向</th>
+    <th>聯合協商（建議模式）</th>
+    <th>個別協商（各自為政）</th>
+  </tr>
+  <tr>
+    <td><strong>啟動條件</strong></td>
+    <td>各工會合意共同組成協商委員會</td>
+    <td>任一工會拒絕聯合，或無法就代表分配達成共識</td>
+  </tr>
+  <tr>
+    <td><strong>協商代表</strong></td>
+    <td>依會員比例分配，統一對外</td>
+    <td>各工會各自指派代表，分別協商</td>
+  </tr>
+  <tr>
+    <td><strong>協約效力</strong></td>
+    <td>單一協約，對所有參與工會之會員有效</td>
+    <td>多份協約並存，可能條件不一</td>
+  </tr>
+  <tr>
+    <td><strong>談判力量</strong></td>
+    <td>較強（整合勞方力量）</td>
+    <td>較弱（工會各自為戰，雇主可各個擊破）</td>
+  </tr>
+  <tr>
+    <td><strong>協商複雜度</strong></td>
+    <td>內部整合成本高，但對外簡單</td>
+    <td>對外協商成本重複，雇主與多方協商疲乏</td>
+  </tr>
+  <tr>
+    <td><strong>雇主義務</strong></td>
+    <td>與聯合委員會誠信協商即可</td>
+    <td>須分別與各工會誠信協商，不得拒絕任一方</td>
+  </tr>
+  <tr>
+    <td><strong>條件衝突風險</strong></td>
+    <td>低（僅一份協約）</td>
+    <td>高（各協約條件可能衝突，依有利原則處理）</td>
+  </tr>
+  <tr>
+    <td><strong>主管機關介入</strong></td>
+    <td>通常無需</td>
+    <td>爭議時可申請調解或不當勞動行為裁決</td>
+  </tr>
+  <tr>
+    <td><strong>法律建議</strong></td>
+    <td><span class="tag tag-green">優先採用</span></td>
+    <td><span class="tag tag-yellow">備用方案</span></td>
+  </tr>
+</table>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>七、企業工會 vs 產業工會：在事業單位內之角色比較</h2>
+
+<table>
+  <tr>
+    <th>面向</th>
+    <th>企業工會</th>
+    <th>產業工會</th>
+  </tr>
+  <tr>
+    <td><strong>組織範圍</strong></td>
+    <td>僅限該事業單位（或廠場）</td>
+    <td>跨事業單位，同產業</td>
+  </tr>
+  <tr>
+    <td><strong>在事業單位內的協商對象</strong></td>
+    <td>該事業單位雇主</td>
+    <td>該事業單位雇主（僅限在該廠區之會員）</td>
+  </tr>
+  <tr>
+    <td><strong>協約適用勞工</strong></td>
+    <td>企業工會會員（≥同一廠場2/3勞工加入時，非會員亦適用）</td>
+    <td>僅其在該事業單位之會員</td>
+  </tr>
+  <tr>
+    <td><strong>工會法組織門檻</strong></td>
+    <td>同一廠場/事業單位勞工30人以上</td>
+    <td>跨事業單位，同產業勞工30人以上</td>
+  </tr>
+  <tr>
+    <td><strong>代表性優勢</strong></td>
+    <td>對該事業單位最直接，涵蓋率通常最高</td>
+    <td>可借助產業整體壓力，談判籌碼較廣</td>
+  </tr>
+  <tr>
+    <td><strong>協約擴張效力</strong></td>
+    <td>會員超過廠場勞工2/3時，非會員亦受拘束（§20）</td>
+    <td>不具廠場擴張效力（僅對其會員有效）</td>
+  </tr>
+</table>
+
+<div class="law-card">
+  <div class="law-title">團體協約法 第20條（協約擴張效力）</div>
+  事業單位內，同種類之勞工有三分之二以上適用同一團體協約，則其他未加入工會之同種類勞工，亦受該協約之拘束。此擴張效力主要對企業工會簽訂之廠場協約有實際意義。
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>八、企業與工會實務操作建議</h2>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num">🏢</div>
+    <div class="step-body">
+      <div class="step-title">雇主建議</div>
+      <ul>
+        <li>主動邀集事業單位內各工會召開協商前置會議，確認各方代表資格與人數</li>
+        <li>以書面要求各工會提供在本事業單位之會員名冊，確認會員人數基礎</li>
+        <li>不得以「優先協商某一工會」方式差別對待，以免構成不當勞動行為</li>
+        <li>協商過程全程留存紀錄（錄音、會議紀錄），以備日後爭議之舉證</li>
+        <li>若多份協約並存，宜請法律顧問檢視條件是否衝突，必要時向主管機關諮詢</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">👷</div>
+    <div class="step-body">
+      <div class="step-title">工會建議</div>
+      <ul>
+        <li>與其他工會事先溝通，優先嘗試聯合協商，統一訴求以增強談判力</li>
+        <li>保持會員名冊更新，確保能準確計算在事業單位內之有效會員數</li>
+        <li>以書面向雇主提出協商請求，並保留寄達紀錄（掛號或電子確認）</li>
+        <li>若雇主無正當理由拒絕協商，應即申請不當勞動行為裁決，勿拖延</li>
+        <li>協商代表應具備足夠之授權，避免代表無法當場決定致使協商停滯</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<h2>九、相關法規索引</h2>
+
+<table>
+  <tr>
+    <th>法規</th>
+    <th>重要條文</th>
+    <th>重點說明</th>
+  </tr>
+  <tr>
+    <td>工會法</td>
+    <td>§6（工會種類）<br>§35（不當勞動行為）<br>§45（罰則）</td>
+    <td>工會組織型態；雇主不得拒絕協商、差別對待工會</td>
+  </tr>
+  <tr>
+    <td>團體協約法</td>
+    <td>§6（誠信協商義務與代表）<br>§19（有利原則）<br>§20（協約擴張效力）<br>§32（罰則）</td>
+    <td>多工會並存時之協商程序；協約衝突時有利勞工之條件優先；廠場2/3效力擴張</td>
+  </tr>
+  <tr>
+    <td>勞資爭議處理法</td>
+    <td>§9（調解申請）<br>§39（裁決申請）<br>§51（裁決效力）</td>
+    <td>協商破裂或雇主拒絕時之救濟；不當勞動行為裁決程序</td>
+  </tr>
+  <tr>
+    <td>勞動部解釋函令</td>
+    <td>勞動關係字相關函釋</td>
+    <td>多工會並存協商實務認定基準；不當勞動行為認定標準</td>
+  </tr>
+</table>
+
+<div class="source-note">
+  本文件依據工會法（2011年修正）、團體協約法（2011年修正）及勞動部相關行政解釋整理。如有法規修正，請以全國法規資料庫（https://law.moj.gov.tw）最新版本為準。本文件僅供參考，具體個案請洽勞動法律專業人士或直轄市勞工局諮詢。
+</div>
+
+</div>
+</body>
+</html>
